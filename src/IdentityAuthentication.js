@@ -1,3 +1,4 @@
+import { postIdentityAuthentication } from './api';
 import { Input } from './components';
 import useForm from './hooks/useForm';
 
@@ -23,7 +24,9 @@ const onSubmit = async ({
     civilcodeLast,
     mobile: mobileFirst + mobileMiddle + mobileLast,
   };
-  console.log(data); // post 요청으로 변경
+  const { response, error } = await postIdentityAuthentication(data);
+  const { token } = response;
+  console.log(token, error);
 };
 const validate = () => ({});
 

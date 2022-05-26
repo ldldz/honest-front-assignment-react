@@ -2,6 +2,8 @@ export default function Input({
   value,
   type,
   name,
+  maxLength,
+  pattern,
   placeholder,
   children,
   onChange,
@@ -12,6 +14,8 @@ export default function Input({
         value={value}
         type={type}
         name={name}
+        maxLength={maxLength}
+        pattern={pattern}
         placeholder={placeholder}
         onChange={onChange}
       />

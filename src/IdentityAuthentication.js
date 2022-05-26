@@ -1,6 +1,7 @@
 import { postIdentityAuthentication } from './api';
 import { Input } from './components';
 import useForm from './hooks/useForm';
+import { validateIdentity } from './utils/validate';
 
 const initialValues = {
   mobileFirst: '010',
@@ -28,13 +29,12 @@ const onSubmit = async ({
   const { token } = response;
   console.log(token, error);
 };
-const validate = () => ({});
 
 function IdentityAuthentication() {
-  const { values, handleChange, handleSubmit } = useForm({
+  const { values, isValid, handleChange, handleSubmit } = useForm({
     initialValues,
     onSubmit,
-    validate,
+    validate: validateIdentity,
   });
 
   return (
@@ -44,11 +44,20 @@ function IdentityAuthentication() {
         <label>
           휴대폰 번호
           <div className="inputs">
-            <Input defaultValue={'010'} type={'tel'} name="mobileFirst" />
+            <Input
+              value={values.mobileFirst}
+              type={'tel'}
+              name="mobileFirst"
+              maxLength={3}
+              pattern="^[0-9]+$"
+              onChange={handleChange}
+            />
             -
             <Input
               value={values.mobileMiddle}
               type={'tel'}
+              maxLength={4}
+              pattern="^[0-9]+$"
               name="mobileMiddle"
               onChange={handleChange}
             />
@@ -57,6 +66,8 @@ function IdentityAuthentication() {
               value={values.mobileLast}
               type={'tel'}
               name="mobileLast"
+              maxLength={4}
+              pattern="^[0-9]+$"
               onChange={handleChange}
             />
           </div>
@@ -66,8 +77,10 @@ function IdentityAuthentication() {
           <div className="inputs">
             <Input
               value={values.civilcodeFirst}
-              type={'number'}
+              type={'tel'}
               name={'civilcodeFirst'}
+              maxLength={6}
+              pattern="^[0-9]+$"
               placeholder="앞 6자리"
               onChange={handleChange}
             />
@@ -76,6 +89,8 @@ function IdentityAuthentication() {
               value={values.civilcodeLast}
               type={'password'}
               name={'civilcodeLast'}
+              maxLength={7}
+              pattern="^[0-9]+$"
               placeholder="뒤 7자리"
               onChange={handleChange}
             />
@@ -88,12 +103,14 @@ function IdentityAuthentication() {
               value={values.name}
               type={'text'}
               name={'name'}
+              maxLength={17}
+              pattern="^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$"
               placeholder="이름을 입력해 주세요"
               onChange={handleChange}
             />
           </div>
         </label>
-        <button className="submitButton" type={'submit'}>
+        <button className="submitButton" type={'submit'} disabled={!isValid}>
           다음
         </button>
       </form>

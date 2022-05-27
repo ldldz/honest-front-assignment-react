@@ -1,24 +1,12 @@
-import { Navigate, Route, Routes } from 'react-router';
 import { AuthenticationProvider } from './contexts/Authentication';
-import IdentityAuthentication from './IdentityAuthentication';
-import PhoneCertification from './PhoneCertification';
+import Router from './Router';
+
 import './styles.css';
 
 function App() {
   return (
     <AuthenticationProvider>
-      <Routes>
-        <Route
-          path="/"
-          element={<Navigate to="/identity-authentication" replace />}
-        />
-        <Route
-          path="/identity-authentication"
-          element={<IdentityAuthentication />}
-        />
-        <Route path="/phone-certification" element={<PhoneCertification />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <Router />
     </AuthenticationProvider>
   );
 }

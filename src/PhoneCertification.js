@@ -1,6 +1,11 @@
+import { useContext } from 'react';
 import { Input, Timer } from './components';
+import { AuthenticationContext } from './contexts/Authentication';
 
 function PhoneCertification() {
+  const { token, identityData } = useContext(AuthenticationContext);
+  console.log(token, identityData);
+
   function handleSubmit(e) {
     e.preventDefault();
   }

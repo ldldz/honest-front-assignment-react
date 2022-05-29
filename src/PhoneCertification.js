@@ -4,15 +4,24 @@ import { AuthenticationContext } from './contexts/Authentication';
 import useForm from './hooks/useForm';
 import { validateAuthNo } from './utils/validate';
 
-const initialValues = {
-  authNo: '',
-  token: '',
-};
+const initialValues = { authNo: '' };
 
 function PhoneCertification() {
-  const { token, identityData } = useContext(AuthenticationContext);
+  const { token, tokenIssueTime, setTokenByIdentityData } = useContext(
+    AuthenticationContext
+  );
 
-  function onSubmit({ authNo }) {}
+  function onSubmit({ authNo }) {
+    console.log(token, tokenIssueTime, authNo);
+  }
+
+  async function updateToken() {
+    try {
+      await setTokenByIdentityData();
+    } catch (error) {
+      alert(error);
+    }
+  }
 
   const { values, isValid, handleChange, handleSubmit } = useForm({
     initialValues,
@@ -43,7 +52,9 @@ function PhoneCertification() {
               placeholder={'번호 6자리를 입력해 주세요'}
               onChange={handleChange}
             >
-              <button className="resend">재전송</button>
+              <button type="button" className="resend" onClick={updateToken}>
+                재전송
+              </button>
             </Input>
           </div>
         </label>

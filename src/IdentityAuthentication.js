@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router';
-import { postIdentityAuthentication } from './api';
 import { Input } from './components';
 import { AuthenticationContext } from './contexts/Authentication';
 import useForm from './hooks/useForm';
@@ -17,36 +16,22 @@ const initialValues = {
 
 function IdentityAuthentication() {
   const navigate = useNavigate();
-  const { setToken, setIdentityData } = useContext(AuthenticationContext);
+  const { setTokenByIdentityData } = useContext(AuthenticationContext);
 
-  const onSubmit = async ({
-    name,
-    civilcodeFirst,
-    civilcodeLast,
-    mobileFirst,
-    mobileMiddle,
-    mobileLast,
-  }) => {
+  async function onSubmit(values) {
     try {
-      const data = {
-        name,
-        civilcodeFirst,
-        civilcodeLast,
-        mobile: mobileFirst + mobileMiddle + mobileLast,
+      const identityData = {
+        name: values.name,
+        civilcodeFirst: values.civilcodeFirst,
+        civilcodeLast: values.civilcodeLast,
+        mobile: values.mobileFirst + values.mobileMiddle + values.mobileLast,
       };
-      const { response, error } = await postIdentityAuthentication(data);
-
-      if (error) {
-        throw new Error('token을 받지 못했습니다.');
-      }
-      setToken(response.token);
-      setIdentityData(data);
-
+      await setTokenByIdentityData(identityData);
       navigate('/phone-certification', { replace: true });
     } catch (error) {
       alert(error);
     }
-  };
+  }
   const { values, isValid, handleChange, handleSubmit } = useForm({
     initialValues,
     onSubmit,

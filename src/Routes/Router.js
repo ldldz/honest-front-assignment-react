@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
-import { AuthenticationContext } from './contexts/Authentication';
+import { AuthenticationContext } from '../contexts/Authentication';
 
-import IdentityAuthentication from './IdentityAuthentication';
-import PhoneCertification from './PhoneCertification';
+import IdentityAuthentication from '../pages/IdentityAuthentication';
+import PhoneCertification from '../pages/PhoneCertification';
 
 export default function Router() {
   const { token } = useContext(AuthenticationContext);

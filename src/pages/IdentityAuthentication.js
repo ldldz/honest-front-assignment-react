@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router';
-import { Input } from './components';
-import { AuthenticationContext } from './contexts/Authentication';
-import useForm from './hooks/useForm';
-import { validateIdentity } from './utils/validate';
+import { Input } from '../components';
+import { AuthenticationContext } from '../contexts/Authentication';
+import useForm from '../hooks/useForm';
+import { validateIdentity } from '../utils/validate';
 
 const initialValues = {
   mobileFirst: '010',

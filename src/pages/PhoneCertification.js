@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { postPhoneCertification } from './api';
-import { Input, Timer } from './components';
-import { AuthenticationContext } from './contexts/Authentication';
-import useForm from './hooks/useForm';
-import { validateAuthNo } from './utils/validate';
+import { postPhoneCertification } from '../api';
+import { Input, Timer } from '../components';
+import { AuthenticationContext } from '../contexts/Authentication';
+import useForm from '../hooks/useForm';
+import { validateAuthNo } from '../utils/validate';
 
 const TOKEN_VALID_TIME = 3 * 60 * 1000;
 const initialValues = { authNo: '' };

@@ -1,5 +1,5 @@
 import { AuthenticationProvider } from './contexts/Authentication';
-import Router from './Router';
+import Router from './Routes/Router';
 
 import './styles.css';
 

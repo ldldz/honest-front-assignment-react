@@ -7,6 +7,7 @@ export const validateIdentity = ({
   mobileLast,
 }) => {
   const errors = {};
+
   if (name.length < 2 || name.length > 17) {
     errors.name = true;
   }
@@ -29,6 +30,16 @@ export const validateIdentity = ({
 
   if (mobileLast.length !== 4) {
     errors.mobileLast = true;
+  }
+
+  return errors;
+};
+
+export const validateAuthNo = ({ authNo }) => {
+  const errors = {};
+
+  if (authNo.length !== 6) {
+    errors.authNo = true;
   }
 
   return errors;

@@ -46,30 +46,36 @@ function IdentityAuthentication() {
           휴대폰 번호
           <div className="inputs">
             <Input
-              value={values.mobileFirst}
-              type={'tel'}
-              name="mobileFirst"
-              maxLength={3}
-              pattern="^[0-9]+$"
-              onChange={handleChange}
+              inputProps={{
+                value: values.mobileFirst,
+                type: 'tel',
+                name: 'mobileFirst',
+                maxLength: 3,
+                pattern: '^[0-9]+$',
+                onChange: handleChange,
+              }}
             />
             -
             <Input
-              value={values.mobileMiddle}
-              type={'tel'}
-              maxLength={4}
-              pattern="^[0-9]+$"
-              name="mobileMiddle"
-              onChange={handleChange}
+              inputProps={{
+                value: values.mobileMiddle,
+                type: 'tel',
+                name: 'mobileMiddle',
+                maxLength: 4,
+                pattern: '^[0-9]+$',
+                onChange: handleChange,
+              }}
             />
             -
             <Input
-              value={values.mobileLast}
-              type={'tel'}
-              name="mobileLast"
-              maxLength={4}
-              pattern="^[0-9]+$"
-              onChange={handleChange}
+              inputProps={{
+                value: values.mobileLast,
+                type: 'tel',
+                name: 'mobileLast',
+                maxLength: 4,
+                pattern: '^[0-9]+$',
+                onChange: handleChange,
+              }}
             />
           </div>
         </label>
@@ -77,23 +83,27 @@ function IdentityAuthentication() {
           주민등록 번호
           <div className="inputs">
             <Input
-              value={values.civilcodeFirst}
-              type={'tel'}
-              name={'civilcodeFirst'}
-              maxLength={6}
-              pattern="^[0-9]+$"
-              placeholder="앞 6자리"
-              onChange={handleChange}
+              inputProps={{
+                value: values.civilcodeFirst,
+                type: 'tel',
+                name: 'civilcodeFirst',
+                maxLength: 6,
+                pattern: '^[0-9]+$',
+                placeholder: '앞 6자리',
+                onChange: handleChange,
+              }}
             />
             -
             <Input
-              value={values.civilcodeLast}
-              type={'password'}
-              name={'civilcodeLast'}
-              maxLength={7}
-              pattern="^[0-9]+$"
-              placeholder="뒤 7자리"
-              onChange={handleChange}
+              inputProps={{
+                value: values.civilcodeLast,
+                type: 'password',
+                name: 'civilcodeLast',
+                maxLength: 7,
+                pattern: '^[0-9]+$',
+                placeholder: '뒤 7자리',
+                onChange: handleChange,
+              }}
             />
           </div>
         </label>
@@ -101,13 +111,15 @@ function IdentityAuthentication() {
           이름
           <div className="inputs">
             <Input
-              value={values.name}
-              type={'text'}
-              name={'name'}
-              maxLength={17}
-              pattern="^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$"
-              placeholder="이름을 입력해 주세요"
-              onChange={handleChange}
+              inputProps={{
+                value: values.name,
+                type: 'text',
+                name: 'name',
+                maxLength: 17,
+                pattern: '^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$',
+                placeholder: '이름을 입력해 주세요',
+                onChange: handleChange,
+              }}
             />
           </div>
         </label>

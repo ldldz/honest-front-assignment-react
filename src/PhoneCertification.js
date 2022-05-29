@@ -66,13 +66,15 @@ function PhoneCertification() {
           </div>
           <div className="inputs">
             <Input
-              value={values.authNo}
-              type={'tel'}
-              name={'authNo'}
-              maxLength={6}
-              pattern="^[0-9]+$"
-              placeholder={'번호 6자리를 입력해 주세요'}
-              onChange={handleChange}
+              inputProps={{
+                value: values.authNo,
+                type: 'tel',
+                name: 'authNo',
+                maxLength: 6,
+                pattern: '^[0-9]+$',
+                placeholder: '번호 6자리를 입력해 주세요',
+                onChange: handleChange,
+              }}
             >
               <button type="button" className="resend" onClick={updateToken}>
                 재전송

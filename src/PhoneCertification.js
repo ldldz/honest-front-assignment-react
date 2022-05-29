@@ -1,4 +1,6 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router';
+import { postPhoneCertification } from './api';
 import { Input, Timer } from './components';
 import { AuthenticationContext } from './contexts/Authentication';
 import useForm from './hooks/useForm';
@@ -7,12 +9,24 @@ import { validateAuthNo } from './utils/validate';
 const initialValues = { authNo: '' };
 
 function PhoneCertification() {
+  const navigate = useNavigate();
   const { token, tokenIssueTime, setTokenByIdentityData } = useContext(
     AuthenticationContext
   );
 
-  function onSubmit({ authNo }) {
-    console.log(token, tokenIssueTime, authNo);
+  async function onSubmit({ authNo }) {
+    try {
+      const phoneCertificationData = { code: authNo, token };
+      const { _, error } = await postPhoneCertification(phoneCertificationData);
+
+      if (error) {
+        throw new Error(error);
+      }
+      alert('인증되었습니다.');
+      navigate('/', { replace: true });
+    } catch (error) {
+      alert(error);
+    }
   }
 
   async function updateToken() {

@@ -4,7 +4,6 @@ import { postPhoneCertification } from '../api';
 import { Input, Timer } from '../components';
 import { AuthenticationContext } from '../contexts/Authentication';
 import useForm from '../hooks/useForm';
-import { validateAuthNo } from '../utils/validate';
 
 const TOKEN_VALID_TIME = 3 * 60 * 1000;
 const initialValues = { authNo: '' };
@@ -42,7 +41,6 @@ function PhoneCertification() {
   const { values, isValid, handleChange, handleSubmit } = useForm({
     initialValues,
     onSubmit,
-    validate: validateAuthNo,
   });
 
   useEffect(() => setIsTimerEnd(false), [tokenIssueTime]);
@@ -70,6 +68,7 @@ function PhoneCertification() {
                 value: values.authNo,
                 type: 'tel',
                 name: 'authNo',
+                minLength: 6,
                 maxLength: 6,
                 pattern: '^[0-9]+$',
                 placeholder: '번호 6자리를 입력해 주세요',

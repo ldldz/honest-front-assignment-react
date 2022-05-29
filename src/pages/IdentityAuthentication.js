@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import { Input } from '../components';
 import { AuthenticationContext } from '../contexts/Authentication';
 import useForm from '../hooks/useForm';
-import { validateIdentity } from '../utils/validate';
 
 const initialValues = {
   mobileFirst: '010',
@@ -35,7 +34,6 @@ function IdentityAuthentication() {
   const { values, isValid, handleChange, handleSubmit } = useForm({
     initialValues,
     onSubmit,
-    validate: validateIdentity,
   });
 
   return (
@@ -50,6 +48,7 @@ function IdentityAuthentication() {
                 value: values.mobileFirst,
                 type: 'tel',
                 name: 'mobileFirst',
+                minLength: 3,
                 maxLength: 3,
                 pattern: '^[0-9]+$',
                 onChange: handleChange,
@@ -61,6 +60,7 @@ function IdentityAuthentication() {
                 value: values.mobileMiddle,
                 type: 'tel',
                 name: 'mobileMiddle',
+                minLength: 3,
                 maxLength: 4,
                 pattern: '^[0-9]+$',
                 onChange: handleChange,
@@ -72,6 +72,7 @@ function IdentityAuthentication() {
                 value: values.mobileLast,
                 type: 'tel',
                 name: 'mobileLast',
+                minLength: 4,
                 maxLength: 4,
                 pattern: '^[0-9]+$',
                 onChange: handleChange,
@@ -87,6 +88,7 @@ function IdentityAuthentication() {
                 value: values.civilcodeFirst,
                 type: 'tel',
                 name: 'civilcodeFirst',
+                minLength: 6,
                 maxLength: 6,
                 pattern: '^[0-9]+$',
                 placeholder: '앞 6자리',
@@ -99,6 +101,7 @@ function IdentityAuthentication() {
                 value: values.civilcodeLast,
                 type: 'password',
                 name: 'civilcodeLast',
+                minLength: 7,
                 maxLength: 7,
                 pattern: '^[0-9]+$',
                 placeholder: '뒤 7자리',
@@ -115,6 +118,7 @@ function IdentityAuthentication() {
                 value: values.name,
                 type: 'text',
                 name: 'name',
+                minLength: 2,
                 maxLength: 17,
                 pattern: '^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$',
                 placeholder: '이름을 입력해 주세요',

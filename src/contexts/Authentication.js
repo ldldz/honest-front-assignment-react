@@ -17,7 +17,7 @@ export function AuthenticationProvider({ children }) {
       throw new Error('token을 받지 못했습니다.');
     }
     setToken(response.token);
-    setTokenIssueTime(new Date());
+    setTokenIssueTime(new Date().getTime());
     setIdentityData(newIdentityData);
     alert('인증번호를 전송하였습니다.');
   }

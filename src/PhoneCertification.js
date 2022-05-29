@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { postPhoneCertification } from './api';
 import { Input, Timer } from './components';
@@ -6,10 +6,12 @@ import { AuthenticationContext } from './contexts/Authentication';
 import useForm from './hooks/useForm';
 import { validateAuthNo } from './utils/validate';
 
+const TOKEN_VALID_TIME = 3 * 60 * 1000;
 const initialValues = { authNo: '' };
 
 function PhoneCertification() {
   const navigate = useNavigate();
+  const [isTimerEnd, setIsTimerEnd] = useState(false);
   const { token, tokenIssueTime, setTokenByIdentityData } = useContext(
     AuthenticationContext
   );
@@ -17,7 +19,7 @@ function PhoneCertification() {
   async function onSubmit({ authNo }) {
     try {
       const phoneCertificationData = { code: authNo, token };
-      const { _, error } = await postPhoneCertification(phoneCertificationData);
+      const { error } = await postPhoneCertification(phoneCertificationData);
 
       if (error) {
         throw new Error(error);
@@ -43,6 +45,8 @@ function PhoneCertification() {
     validate: validateAuthNo,
   });
 
+  useEffect(() => setIsTimerEnd(false), [tokenIssueTime]);
+
   return (
     <main>
       <h1>
@@ -54,7 +58,11 @@ function PhoneCertification() {
         <label>
           <div className="flex">
             <span>인증번호</span>
-            <Timer />
+            <Timer
+              validTime={TOKEN_VALID_TIME}
+              startTime={tokenIssueTime}
+              setIsTimerEnd={setIsTimerEnd}
+            />
           </div>
           <div className="inputs">
             <Input
@@ -72,7 +80,11 @@ function PhoneCertification() {
             </Input>
           </div>
         </label>
-        <button className="submitButton" type={'submit'} disabled={!isValid}>
+        <button
+          className="submitButton"
+          type={'submit'}
+          disabled={!(isValid && !isTimerEnd)}
+        >
           본인인증하기
         </button>
       </form>

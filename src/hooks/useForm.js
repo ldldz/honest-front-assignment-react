@@ -3,6 +3,7 @@ import { useState } from 'react';
 function useForm({ initialValues, onSubmit, validate }) {
   const [values, setValues] = useState(initialValues);
   const [isValid, setIsValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = ({ target: { name, value, pattern } }) => {
     if (value === '' || value.match(pattern) != null) {
@@ -12,14 +13,19 @@ function useForm({ initialValues, onSubmit, validate }) {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    onSubmit(values);
+    if (!isLoading) {
+      setIsLoading(true);
+      await onSubmit(values);
+      setIsLoading(false);
+    }
   };
 
   return {
     values,
     isValid,
+    isLoading,
     handleChange,
     handleSubmit,
   };

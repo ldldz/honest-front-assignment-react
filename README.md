@@ -2,7 +2,7 @@
 
 ## 배포 주소
 
-https://the-great-ldldz-site.netlify.app/phone-certification
+https://the-great-ldldz-site.netlify.app
 
 ## 과제 설명
 
